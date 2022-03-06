@@ -127,7 +127,8 @@ enum ESMC_LogMsgType_Flag{
                 ESMC_LOGMSG_JSON =6 };
 
 enum ESMC_MeshLoc_Flag {ESMC_MESHLOC_NODE=0,
-                        ESMC_MESHLOC_ELEMENT};
+                        ESMC_MESHLOC_ELEMENT,
+                        ESMC_MESHLOC_NONE};
 
 enum ESMC_MeshStatus_Flag {ESMC_MESHSTATUS_UNINIT=0,
                            ESMC_MESHSTATUS_EMPTY,

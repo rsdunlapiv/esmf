@@ -279,7 +279,7 @@ void get_elemConn_info_1Dvar_from_ESMFMesh_file(int pioSystemDesc, int pioFileDe
   
   // Get rid of numElementConn decomp
   piorc = PIOc_freedecomp(pioSystemDesc, nec_ed_iodesc);
-  if (!CHECKPIOERROR(piorc, std::string("Error freeing nodeCoord decomp "),
+  if (!CHECKPIOERROR(piorc, std::string("Error freeing numElementConn decomp "),
                      ESMF_RC_FILE_OPEN, localrc)) throw localrc;;
 
 
@@ -705,11 +705,11 @@ void get_nodeCoords_from_ESMFMesh_file(int pioSystemDesc, int pioFileDesc, char 
     piorc = PIOc_read_darray(pioFileDesc, varid, node_iodesc, num_nodes*coordDim, nodeCoords);
     if (!CHECKPIOERROR(piorc, std::string("Error reading variable nodeCoords from file ") + filename,
                       ESMF_RC_FILE_OPEN, localrc)) throw localrc;
-
+   
     // Get rid of nodeCoords decomp
     piorc = PIOc_freedecomp(pioSystemDesc, node_iodesc);
     if (!CHECKPIOERROR(piorc, std::string("Error freeing nodeCoord decomp "),
-                      ESMF_RC_FILE_OPEN, localrc)) throw localrc;;
+                       ESMF_RC_FILE_OPEN, localrc)) throw localrc;;
   
 }
 
