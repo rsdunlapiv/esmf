@@ -22,13 +22,6 @@ jobs:
           path: esmf-containers
           ref: main
     
-    - name: Checkout ESMF
-      uses: actions/checkout@v3
-      with:
-          repository: esmf-org/esmf
-          path: esmf
-          ref: develop
-       
     - name: Build Docker image  
       run: | 
         cd ${{ github.workspace }}/esmf-containers/build-esmf-docs/esmf
@@ -38,7 +31,7 @@ jobs:
       run: |
         mkdir -p ${{ github.workspace }}/artifacts
         CID=$(docker run -dit --name runner esmf/build-esmf-docs)
-        docker cp ${CID}:/tmp/artifacts.zip ${{ github.workspace }}/artifacts
+        docker cp ${CID}:/artifacts/artifacts.zip ${{ github.workspace }}/artifacts
         docker stop ${CID}
         docker rm ${CID}
             
