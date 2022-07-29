@@ -31,7 +31,7 @@ jobs:
       run: |
         mkdir -p ${{ github.workspace }}/artifacts
         CID=$(docker run -dit --name runner esmf/build-esmf-docs)
-        docker cp ${CID}:/artifacts/artifacts.zip ${{ github.workspace }}/artifacts
+        docker cp ${CID}:/artifacts/doc-artifacts.zip ${{ github.workspace }}/artifacts
         docker stop ${CID}
         docker rm ${CID}
             
