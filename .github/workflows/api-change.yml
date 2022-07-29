@@ -34,7 +34,7 @@ jobs:
     - name: Build Docker image  
       run: | 
         cd ${{ github.workspace }}/esmf-containers/api-change
-        docker build . --tag esmf/api-change --build-arg TAG1="v8.3.0" --build-arg TAG2="develop"
+        docker build . --tag esmf/api-change --build-arg TAG1="${{ inputs.tag1 }}" --build-arg TAG2="${{ inputs.tag2 }}"
         
     - name: Copy artifacts
       run: |
