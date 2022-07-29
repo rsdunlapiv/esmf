@@ -1,0 +1,35 @@
+name: Build ESMF Docs
+
+on:
+  workflow_dispatch:
+#  push:
+#    branches: [ "develop" ]
+#  pull_request:
+#    branches: [ "develop" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    
+    - name: Checkout Dockerfiles
+      uses: actions/checkout@v3
+      with:
+          repository: esmf-org/esmf-containers
+          path: esmf-containers
+          ref: main
+    
+    - name: Checkout ESMF
+      uses: actions/checkout@v3
+      with:
+          repository: esmf-org/esmf
+          path: esmf
+          ref: develop
+       
+    - name: Build Docker image  
+      run: | 
+        cd ${{ github.workspace }}/esmf-containers/build-esmf-docs/esmf
+        docker build . --tag esmf/build-esmf-docs:$(date +%s)
