@@ -32,4 +32,18 @@ jobs:
     - name: Build Docker image  
       run: | 
         cd ${{ github.workspace }}/esmf-containers/build-esmf-docs/esmf
-        docker build . --tag esmf/build-esmf-docs:$(date +%s)
+        docker build . --tag esmf/build-esmf-docs
+        
+    - name: Copy artifacts
+      run: |
+        mkdir -p ${{ github.workspace }}/artifacts
+        CID=$(docker run -dit --name runner esmf/build-esmf-docs)
+        docker cp ${CID}:/tmp/artifacts.zip ${{ github.workspace }}/artifacts
+        docker stop ${CID}
+        docker rm ${CID}
+            
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: esmf-docs
+        path: ${{ github.workspace }}/artifacts
